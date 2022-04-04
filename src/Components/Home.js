@@ -36,7 +36,7 @@ const Home = () => {
                                         <span id="no_of_reviews">{product.numOfReviews}</span>
                                     </div>
                                     <p className="card-text">Rs.{product.price}</p>
-                                    <a href={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</a>
+                                    <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</Link>
                                 </div>
                             </div>
                         </div>
