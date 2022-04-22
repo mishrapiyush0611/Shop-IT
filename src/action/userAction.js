@@ -24,7 +24,7 @@ try{
     }
     const {data}=await axios.post('http://localhost:4000/api/v1/login',{email,password},config)
     console.log(data)
-    localStorage.setItem("user", JSON.stringify(data.token));
+    localStorage.setItem("user", JSON.stringify(data));
     dispatch({
         type:LOGIN_SUCCESS,
         payload:data.user

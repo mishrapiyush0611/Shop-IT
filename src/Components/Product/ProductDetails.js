@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { getProductDetails } from '../../action/productAction';
 import Loader from '../Layout/Loader';
-
+import { addItemToCart } from '../../action/cartAction';
 const ProductDetails = () => {
     const dispatch=useDispatch();
     const params=useParams();
@@ -32,6 +32,9 @@ const ProductDetails = () => {
         const qty=count.valueAsNumber-1
         setQuantity(qty);
      }
+     const addToCart=()=>{
+        dispatch(addItemToCart(params.id,quantity))
+     }
   return (
     <Fragment>
         {loading?<Loader></Loader>:(
@@ -41,7 +44,7 @@ const ProductDetails = () => {
                <Carousel pause='hover'>
                    {product.images && product.images.map(image =>(
                         <Carousel.Item>
-                        <img className='d-block w-100' src={image.url}></img>
+                        <img className='d-block w-100' src={image.url} alt=""></img>
                         </Carousel.Item>
                    ))}
                </Carousel>
@@ -68,7 +71,7 @@ const ProductDetails = () => {
 
                     <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                 </div>
-                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock===0} onClick={addToCart}>Add to Cart</button>
 
                 <hr/>
 
