@@ -3,17 +3,21 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 const Search = () => {
     const [keyword,setKeyword]=useState('')
-    const Navigate=useNavigate();
+ const history=useNavigate();
+  
     const searchHandler=(e)=>{
-        e.preventdefault()
-        if(keyword){
-             Navigate(`/search/${keyword}`)
+        e.preventDefault()
+        if(keyword.trim()){
+          history(`/search/${keyword}`)
         }
         else{
-            Navigate('/')
+          history('/')
         }
+        {console.log(keyword)}
     }
   return (
+    <>
+   
     <form onSubmit={searchHandler}>
         <div className="col-12 col-md-6 mt-2 mt-md-0">
         <div className="input-group">
@@ -22,8 +26,9 @@ const Search = () => {
             id="search_field"
             className="form-control"
             placeholder="Enter Product Name ..."
-            onChange={(e)=>e.target.value}
+            onChange={(e)=>setKeyword(e.target.value)}
           />
+         
           <div className="input-group-append">
             <button id="search_btn" className="btn">
               <i className="fa fa-search" aria-hidden="true"></i>
@@ -32,6 +37,7 @@ const Search = () => {
         </div>
       </div>
     </form>
+    </>
   )
 }
 

@@ -2,14 +2,18 @@ import React, { Fragment, useEffect } from 'react'
 import MetaData from './Layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../action/productAction'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Loader from './Layout/Loader'
 const Home = () => {
     const dispatch = useDispatch();
+    const params=useParams();
+    const keyword=params.keyword
+    
     const { loading, products, error } = useSelector(state => state.products)
     useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch])
+        console.log(keyword)
+        dispatch(getProducts(keyword));
+    }, [dispatch,keyword])
     return (
         <Fragment>
             <MetaData title={'Buy Best Products Online'}></MetaData>

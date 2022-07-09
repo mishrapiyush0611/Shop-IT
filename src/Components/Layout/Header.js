@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import { logoutUser } from '../../action/userAction'
 
+import { Route,Routes } from 'react-router-dom'
+import Search from './Search'
+
+
 const Header = () => {
   const dispatch=useDispatch(); 
   const {user,loading}=useSelector(state=>state.auth)
@@ -17,24 +21,14 @@ const Header = () => {
         <nav className="navbar row">
       <div className="col-12 col-md-3">
         <div className="navbar-brand">
-       
+        <Link to="/">
+                <img src="https://w7.pngwing.com/pngs/621/196/png-transparent-e-commerce-logo-logo-e-commerce-electronic-business-ecommerce-angle-text-service.png" style={{width:"200px",height:"60px"}}/>
+                        </Link>
         </div>
       </div>
 
       <div className="col-12 col-md-6 mt-2 mt-md-0">
-        <div className="input-group">
-          <input
-            type="text"
-            id="search_field"
-            className="form-control"
-            placeholder="Enter Product Name ..."
-          />
-          <div className="input-group-append">
-            <button id="search_btn" className="btn">
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
+       <Search></Search>
       </div>
 
       <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
@@ -58,7 +52,7 @@ const Header = () => {
  </Link>
 
  <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
-
+        
      {user && user.role === 'admin' && (
          <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
      )}
