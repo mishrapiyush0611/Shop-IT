@@ -20,9 +20,10 @@ try{
     const config={
         headers:{
             'Content-Type':'application/json',
-        }
+        },
+        withCredentials: true
     }
-    const {data}=await axios.post('http://localhost:4000/api/v1/login',{email,password},config)
+    const {data}=await axios.post('/api/v1/login',{email,password},config)
     console.log(data)
     localStorage.setItem("user", JSON.stringify(data));
     dispatch({
@@ -47,7 +48,7 @@ export const register=(userData)=>async(dispatch)=>{
                 'Content-Type':'multipart/form-data'
             }
         }
-        const {data}=await axios.post('http://localhost:4000/api/v1/register',userData,config)
+        const {data}=await axios.post('/api/v1/register',userData,config)
         console.log(data)
         dispatch({
             type:REGISTER_SUCCESS,
@@ -67,7 +68,7 @@ export const loadUser=()=>async(dispatch)=>{
                 type:LOAD_REQUEST
             })
            
-            const {data}=await axios.get('http://localhost:4000/api/v1/me')
+            const {data}=await axios.get('/api/v1/me')
             console.log(data)
             dispatch({
                 type:LOAD_SUCCESS,
@@ -88,7 +89,7 @@ export const logoutUser=()=>async(dispatch)=>{
             type:LOGOUT_REQUEST
         })
        
-        const {data}=await axios.get('http://localhost:4000/api/v1/logout')
+        const {data}=await axios.get('/api/v1/logout')
         console.log(data)
         dispatch({
             type:LOGOUT_SUCCESS,

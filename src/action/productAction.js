@@ -42,7 +42,7 @@ export const getProductDetails=(id)=>async(dispatch)=>{
         })
     }
 }
-export const newReview=(id)=>async(dispatch)=>{
+export const newReview=(reviewData)=>async(dispatch)=>{
     try{
         dispatch({
             type:NEW_REVIEW_REQUEST
@@ -52,7 +52,7 @@ export const newReview=(id)=>async(dispatch)=>{
                 'Content-type':"application/json"
             }
         }
-       const {data}=await axios.put(`/api/v1/review`,config)
+       const {data}=await axios.put(`/api/v1/review`,reviewData,config)
        console.log(data.product)
         dispatch({
             type:NEW_REVIEW_SUCCESS,
