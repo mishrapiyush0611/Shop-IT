@@ -18,6 +18,9 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import Payment from './Components/Cart/Payment';
 import {loadStripe} from '@stripe/stripe-js'
+import DashBoard from './Components/Admin/DashBoard';
+import ProductsList from './Components/Admin/ProductList';
+import NewProduct from './Components/Admin/NewProduct';
 function App() {
  
   const [stripeApiKey,SetstripeApiKey]=useState('')
@@ -46,6 +49,7 @@ function App() {
        <Route path='/shipping' element={<Shipping></Shipping>} exact></Route>
        <Route path='/register' element={<Register></Register>} exact></Route>
        <Route path='/me' element={<Profile></Profile>} exact></Route>
+      
       {console.log(stripeApiKey)}
        </Routes>
        {stripeApiKey &&
@@ -56,6 +60,11 @@ function App() {
             </Elements>
           }
       </div>
+      <Routes>
+      <Route path='/dashboard' element={<DashBoard></DashBoard>}></Route>
+      <Route path='/admin/products' element={<ProductsList></ProductsList>}></Route>
+      <Route path='/admin/product' element={<NewProduct></NewProduct>}></Route>
+      </Routes>
      <Footer></Footer>
     </div>
     </Router>
