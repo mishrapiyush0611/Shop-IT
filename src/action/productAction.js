@@ -3,6 +3,9 @@ import {ALL_PRODUCTS_FAIL,ALL_PRODUCTS_SUCCESS,ALL_PRODUCTS_REQUEST,CLEAR_ERROR,
     NEW_REVIEW_FAIL
     ,NEW_REVIEW_REQUEST,
     NEW_REVIEW_SUCCESS,NEW_REVIEW_RESET,
+    DELETE_PRODUCT_FAIL
+    ,DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
     NEW_PRODUCT_FAIL
     ,NEW_PRODUCT_REQUEST,
     NEW_PRODUCT_SUCCESS,
@@ -93,6 +96,28 @@ export const newProduct=(productData)=>async(dispatch)=>{
         })
     }
 }
+export const deleteProduct=(id)=>async(dispatch)=>{
+    try{
+        dispatch({
+            type:DELETE_PRODUCT_REQUEST
+        })
+        
+       const {data}=await axios.delete(`/api/v1/admin/product/${id}`)
+       console.log(data.product)
+        dispatch({
+            type:DELETE_PRODUCT_SUCCESS,
+            payload:data.product
+        })
+    }
+    catch(error){
+        dispatch({
+            type:DELETE_PRODUCT_FAIL,
+            payload:error.response.data.message
+        })
+    }
+}
+
+
 
 
 export const newReview=(reviewData)=>async(dispatch)=>{

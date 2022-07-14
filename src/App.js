@@ -21,14 +21,17 @@ import {loadStripe} from '@stripe/stripe-js'
 import DashBoard from './Components/Admin/DashBoard';
 import ProductsList from './Components/Admin/ProductList';
 import NewProduct from './Components/Admin/NewProduct';
+import OrderSuccess from './Components/Cart/OrderSuccess';
+import ListOrders from './Components/order/ListOrder';
+import OrderDetails from './Components/order/OrderDetails';
 function App() {
  
   const [stripeApiKey,SetstripeApiKey]=useState('')
   useEffect(()=>{
     store.dispatch(loadUser())
     async function getStripeApiKey(){
-      const {data}=await axios.get('http://localhost:4000/api/v1/stripeapi')
-      SetstripeApiKey(data.stripe_api_key)
+      const {data}=await axios.get('/api/v1/stripeapi')
+      SetstripeApiKey(data.stripeApiKey)
     }
     getStripeApiKey();
     
@@ -49,7 +52,9 @@ function App() {
        <Route path='/shipping' element={<Shipping></Shipping>} exact></Route>
        <Route path='/register' element={<Register></Register>} exact></Route>
        <Route path='/me' element={<Profile></Profile>} exact></Route>
-      
+      <Route path='/success' element={<OrderSuccess></OrderSuccess>}></Route>
+      <Route path='/orders/me' element={<ListOrders></ListOrders>}></Route>
+      <Route path='/order/:id' element={<OrderDetails></OrderDetails>}></Route>
       {console.log(stripeApiKey)}
        </Routes>
        {stripeApiKey &&
