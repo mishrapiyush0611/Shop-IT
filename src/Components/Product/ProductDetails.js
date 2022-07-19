@@ -129,7 +129,8 @@ const ProductDetails = () => {
 
                     <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                 </div>
-                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock===0} onClick={addToCart}>Add to Cart</button>
+                
+                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock===0 && !user } onClick={addToCart}>Add to Cart</button>
 
                 <hr/>
 

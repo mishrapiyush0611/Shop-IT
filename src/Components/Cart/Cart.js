@@ -7,6 +7,7 @@ import { addItemToCart ,removeItemFromCart} from '../../action/cartAction';
 const Cart = () => {
     const dispatch =useDispatch();
     const {cartItems}=useSelector(state=>state.cart)
+    const {user}=useSelector(state=>state.auth)
     const increaseQty=(id,quantity,stock)=>{
         const newQty=quantity+1
        if(newQty>stock)
@@ -87,9 +88,14 @@ const Cart = () => {
                     <p>Est. total: <span className="order-summary-values">{cartItems.reduce((acc,item)=>(acc+Number(item.quantity)*item.price),0)}</span></p>
     
                     <hr />
-                    <Link to='/shipping'>
+                    {user?  <Link to='/shipping'>
+                    <button id="checkout_btn" className="btn btn-primary btn-block" >Check out</button>
+                    </Link> :
+
+                    <Link to='/login'>
                     <button id="checkout_btn" className="btn btn-primary btn-block" >Check out</button>
                     </Link>
+}
                 </div>
             </div>
         </div>
